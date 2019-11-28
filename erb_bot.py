@@ -78,7 +78,8 @@ class RedditBot:
             self.run_cont()
         except KeyboardInterrupt:
             raise
-        except UnicodeEncodeError:
+        except UnicodeEncodeError as e:
+            log.info(e)
             log.info("The unicode errors are back.")
             time.sleep(10)
             self.run_cont()
