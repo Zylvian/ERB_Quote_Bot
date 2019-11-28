@@ -40,8 +40,8 @@ class Util:
                     return lyric
                 # Checks if comment is a lyric.
 
-                text = str(text)
-                lyric = str(lyric)
+                text = str(text).replace("'","")
+                lyric = str(lyric).replace("'","")
 
                 try:
                     if re.search(text.lower(), lyric.lower(), re.IGNORECASE):
