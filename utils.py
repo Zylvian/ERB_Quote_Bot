@@ -39,6 +39,10 @@ class Util:
                 if is_return_lyric:
                     return lyric
                 # Checks if comment is a lyric.
+
+                text = str(text)
+                lyric = str(lyric)
+
                 try:
                     if re.search(text.lower(), lyric.lower(), re.IGNORECASE):
                         is_return_lyric = True
