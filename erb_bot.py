@@ -36,10 +36,10 @@ class RedditBot:
                 text = comment.body.encode(encoding="utf-8", errors="strict")
 
                 # Gets next lyric or is None.
-                next_lyric = self.util.get_next_lyric(text) and comment.author.name is not self.bot_name
+                next_lyric = self.util.get_next_lyric(text)
 
                 # If a triggerword is in the string...
-                if next_lyric:
+                if next_lyric and comment.author.name is not self.bot_name:
                     response_string = next_lyric
 
                     try:
@@ -65,8 +65,8 @@ class RedditBot:
             self._comment_responder()
         except PrawcoreException as e:
             log.info(e)
-            log.info("Sleeping for 1 minute...")
-            time.sleep(60)
+            log.info("Sleeping for 10 minute...")
+            time.sleep(10)
             self.run_cont()
         except KeyboardInterrupt:
             raise
