@@ -16,7 +16,7 @@ class Util:
         #self.keywords = constants["triggers"]
         self.subreddits = constants["subreddits"]
 
-        with open('data/songs.json', 'r') as file:
+        with open('data/songs.json', 'r', encoding='utf-8') as file:
             songs = json.load(file)
 
         self.all_lyrics = self._get_all_lyrics_list(songs)
