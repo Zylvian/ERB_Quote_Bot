@@ -8,4 +8,4 @@ sudo pip install praw
 
 git clone https://github.com/Zylvian/One-Piece-Reddit-bot
 
-python onepiecewikibot.py >> crash_log.log &
+python erb_bot.py >> crash_log.log &

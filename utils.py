@@ -35,7 +35,6 @@ class Util:
         is_return_lyric = False
 
         for lyric in self.all_lyrics:
-                print(lyric)
                 # If this is the lyric to return.
                 if is_return_lyric:
                     return lyric
@@ -65,7 +64,6 @@ class SpellChecker():
     """
 
     def __init__(self, names):
-        print(names)
         self.model = set(names)
 
     def __known(self, words):
