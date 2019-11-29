@@ -127,3 +127,6 @@ dmypy.json
 .idea/workspace.xml
 
 praw.ini
+.idea
+.gitignore
+.gitattributes
