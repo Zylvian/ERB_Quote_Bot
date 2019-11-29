@@ -33,6 +33,7 @@ class Util:
         """ Checks if the trigger words to call the bot are present in the string """
 
         is_return_lyric = False
+        text = str(text).replace("'","")
 
         for lyric in self.all_lyrics:
                 # If this is the lyric to return.
@@ -40,14 +41,14 @@ class Util:
                     return lyric
                 # Checks if comment is a lyric.
 
-                text = str(text).replace("'","")
+
                 lyric = str(lyric).replace("'","")
 
                 try:
                     if re.search(text.lower(), lyric.lower(), re.IGNORECASE):
                         is_return_lyric = True
                 except re.error:
-                    print("Nothing to repeat?")
+                    pass
 
         # Returns nothing if not.
         return None

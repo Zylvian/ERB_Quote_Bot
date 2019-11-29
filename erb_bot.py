@@ -45,7 +45,7 @@ class RedditBot:
 
                 # If a triggerword is in the string...
 
-                log.info("I am {}, poster is {}, which means {}".format(str(self.bot_name), str(comment.author.name), str(is_self)))
+                log.info("In response to {} I got {}, and the user posting is {}".format(text, next_lyric, str(comment.author.name)))
 
                 if next_lyric and not is_self:
                     response_string = next_lyric
