@@ -14,3 +14,5 @@ Uses Genius' API to fetch the artist Epic Rap Battles of History's songs, and th
 **How to get lyrics from Genius:** https://bigishdata.com/2016/09/27/getting-song-lyrics-from-geniuss-api-scraping/
 
 **Based partially on Hearthscan_Bot:** https://github.com/d-schmidt/hearthscan-bot
+
+**ERB Genius page:** https://genius.com/artists/Epic-rap-battles-of-history
