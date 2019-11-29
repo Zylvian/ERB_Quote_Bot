@@ -1,6 +1,6 @@
 # ERB-bot
  
- A bot designed for r/erb to comment the next lyric of an ERB song.
+ A bot designed for r/erb to comment the next lyric of an Epic Rap Battles of History song.
 
 
 ## Implementation
