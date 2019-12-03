@@ -3,6 +3,8 @@ import json
 import requests
 from bs4 import BeautifulSoup
 
+from erb_bot import RedditBot
+
 base_url = "http://api.genius.com"
 #headers = {}
 # artist_id = "26092"
@@ -94,7 +96,7 @@ def print_song():
         print(dictman["1"])
 
 
-def download():
+def download(bot:RedditBot):
     search_url = base_url + "/search"
 
     headers = {'Authorization': 'Bearer {}'.format(token)}
@@ -117,6 +119,8 @@ def download():
         all_song_names_lyrics_tupled.append(tupleman)
 
     save_songs(all_song_names_lyrics_tupled)
+
+    bot.update_util()
 
 
 """if __name__ == "__main__":

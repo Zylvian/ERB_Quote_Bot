@@ -1,4 +1,6 @@
+import asyncio
 import os
+import threading
 import time
 
 import praw
@@ -22,6 +24,10 @@ class RedditBot:
         self.util = Util()
         self.bot_name = "ERB_Quote_Bot"
 
+    def update_util(self):
+        self.util = Util()
+        log.log("Songs updated!")
+
     def _comment_responder(self):
         reddit = praw.Reddit('bot2')
 
@@ -33,9 +39,8 @@ class RedditBot:
 
             if os.path.isfile(self.LOCK_FILE):
 
-
-                updated = self.update_songs(comment)
-                if updated:
+                if self.update_check(comment):
+                    self.update_songs(comment)
                     continue
 
                 # Parse the comment
@@ -52,8 +57,8 @@ class RedditBot:
                 # If a triggerword is in the string...
 
                 if str(comment.author.name) == "Zylvian":
-                    log.info("In response to {} I got {}, and the user posting is {}".format(text, next_lyric, str(comment.author.name)))
-
+                    log.info("In response to {} I got {}, and the user posting is {}".format(text, next_lyric,
+                                                                                             str(comment.author.name)))
 
                 if next_lyric and not is_self:
                     response_string = next_lyric
@@ -99,12 +104,21 @@ class RedditBot:
 
     def update_songs(self, comment):
 
+        try:
+            x = threading.Thread(target=downloader.download, args=(self,), daemon=True)
+            x.start()
+            comment.reply("Updating songs!")
+        except ValueError as e:
+            comment.reply(e)
+
+
+    def update_check(self, comment):
         text = comment.body.encode(encoding="utf-8", errors="strict")
-        
+
         if isinstance(text, (bytes, bytearray)):
             text = text.decode("utf-8")
         authorcheck = str(comment.author.name) == "Zylvian"
-        textcheck =  "=update" in text
+        textcheck = "=update" in text
 
         """log.info(str(comment.author.name))
         log.info("Zylvian")
@@ -112,17 +126,7 @@ class RedditBot:
         log.info("=update")"""
 
         if authorcheck and textcheck:
-            try:
-                downloader.download()
-                comment.reply("Songs updated!")
-            except ValueError as e:
-                comment.reply(e)
-
             return True
-        else:
-            return False
-
-
 
 
 if __name__ == '__main__':
