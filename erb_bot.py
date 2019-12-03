@@ -34,7 +34,7 @@ class RedditBot:
             if os.path.isfile(self.LOCK_FILE):
 
                 if self.update_songs(comment):
-                    return
+                    continue
 
                 # Parse the comment
                 text = comment.body.encode(encoding="utf-8", errors="strict")
@@ -96,7 +96,15 @@ class RedditBot:
 
     def update_songs(self, comment):
         text = comment.body.encode(encoding="utf-8", errors="strict")
-        if str(comment.author.name) == "Zylvian" and text == "=update":
+        authorcheck = str(comment.author.name) == "Zylvian"
+        textcheck = text == "=update"
+
+        print(str(comment.author.name))
+        print("Zylvian")
+        print(text)
+        print("=update")
+
+        if authorcheck and textcheck:
             try:
                 downloader.download()
                 comment.reply("Songs updated!")
