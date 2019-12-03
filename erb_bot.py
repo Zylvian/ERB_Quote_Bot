@@ -97,8 +97,11 @@ class RedditBot:
     def update_songs(self, comment):
         text = comment.body.encode(encoding="utf-8", errors="strict")
         if comment.author == "Zylvian" and text == "=update":
-            downloader.download()
-            comment.reply("Songs updated!")
+            try:
+                downloader.download()
+                comment.reply("Songs updated!")
+            except ValueError as e:
+                comment.reply(e)
 
         else:
             return False
