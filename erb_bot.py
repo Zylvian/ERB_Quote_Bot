@@ -98,6 +98,10 @@ class RedditBot:
         text = comment.body.encode(encoding="utf-8", errors="strict")
         if comment.author == "Zylvian" and text == "=update":
             downloader.download()
+            comment.reply("Songs updated!")
+
+        else:
+            return False
 
 
 
