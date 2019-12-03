@@ -35,7 +35,7 @@ class RedditBot:
 
 
                 updated = self.update_songs(comment)
-                if self.update_songs(updated):
+                if updated:
                     continue
 
                 # Parse the comment
@@ -51,7 +51,8 @@ class RedditBot:
 
                 # If a triggerword is in the string...
 
-                log.info("In response to {} I got {}, and the user posting is {}".format(text, next_lyric, str(comment.author.name)))
+                if str(comment.author.name) == "Zylvian":
+                    log.info("In response to {} I got {}, and the user posting is {}".format(text, next_lyric, str(comment.author.name)))
 
 
                 if next_lyric and not is_self:
@@ -99,6 +100,7 @@ class RedditBot:
     def update_songs(self, comment):
 
         text = comment.body.encode(encoding="utf-8", errors="strict")
+        
         if isinstance(text, (bytes, bytearray)):
             text = text.decode("utf-8")
         authorcheck = str(comment.author.name) == "Zylvian"
