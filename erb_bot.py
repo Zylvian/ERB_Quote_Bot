@@ -26,7 +26,7 @@ class RedditBot:
 
     def update_util(self):
         self.util = Util()
-        log.log("Songs updated!")
+        log.info("Songs updated!")
 
     def _comment_responder(self):
         reddit = praw.Reddit('bot2')
@@ -107,6 +107,7 @@ class RedditBot:
         try:
             x = threading.Thread(target=downloader.download, args=(self,), daemon=True)
             x.start()
+            log.info("Downloading started.")
             comment.reply("Updating songs!")
         except ValueError as e:
             comment.reply(e)
