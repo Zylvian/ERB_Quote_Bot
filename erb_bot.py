@@ -5,6 +5,7 @@ import praw
 from prawcore import PrawcoreException
 from utils import Util
 import logging as log
+import downloader
 
 
 class RedditBot:
@@ -32,6 +33,9 @@ class RedditBot:
 
             if os.path.isfile(self.LOCK_FILE):
 
+                if self.update_songs(comment):
+                    return
+
                 # Parse the comment
                 text = comment.body.encode(encoding="utf-8", errors="strict")
 
@@ -46,6 +50,7 @@ class RedditBot:
                 # If a triggerword is in the string...
 
                 log.info("In response to {} I got {}, and the user posting is {}".format(text, next_lyric, str(comment.author.name)))
+
 
                 if next_lyric and not is_self:
                     response_string = next_lyric
@@ -88,6 +93,13 @@ class RedditBot:
             log.info("Something random happened, sleeping for 10 sec.")
             time.sleep(10)
             self.run_cont()
+
+    def update_songs(self, comment):
+        text = comment.body.encode(encoding="utf-8", errors="strict")
+        if comment.author == "Zylvian" and text == "=update":
+            downloader.download()
+
+
 
 
 if __name__ == '__main__':
