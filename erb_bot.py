@@ -33,7 +33,9 @@ class RedditBot:
 
             if os.path.isfile(self.LOCK_FILE):
 
-                if self.update_songs(comment):
+
+                updated = self.update_songs(comment )
+                if self.update_songs(updated):
                     continue
 
                 # Parse the comment
@@ -95,14 +97,15 @@ class RedditBot:
             self.run_cont()
 
     def update_songs(self, comment):
+        
         text = comment.body.encode(encoding="utf-8", errors="strict")
         authorcheck = str(comment.author.name) == "Zylvian"
         textcheck = text == "=update"
 
-        print(str(comment.author.name))
-        print("Zylvian")
-        print(text)
-        print("=update")
+        log.info(str(comment.author.name))
+        log.info("Zylvian")
+        log.info(text)
+        log.info("=update")
 
         if authorcheck and textcheck:
             try:
